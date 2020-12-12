@@ -11,23 +11,13 @@ import javax.persistence.ManyToOne;
  * Github : http://github.com/jojoldu
  */
 @Entity
-public class Study {
-    @Id
-    @GeneratedValue
+public class Comment {
+    @Id @GeneratedValue
     private Long id;
 
-    private String name;
-
-    @ManyToOne()
-    private Account owner;
-
-    public Account getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Account owner) {
-        this.owner = owner;
-    }
+    private String comment;
+    @ManyToOne
+    private Post post;
 
     public Long getId() {
         return id;
@@ -37,11 +27,19 @@ public class Study {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getComment() {
+        return comment;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 }
