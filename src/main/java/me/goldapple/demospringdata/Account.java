@@ -2,6 +2,8 @@ package me.goldapple.demospringdata;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by jojoldu@gmail.com on 2020-12-12
@@ -14,18 +16,19 @@ public class Account {
     private Long id;
     @Column(nullable = false,unique = true)
     private String username;
-    private String password;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created = new Date();
-    private String yes;
-    @Transient
-    private String no;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "street",column = @Column(name = "home_street"))
-    })
-    private Address address;
+    private String password;
+
+    @OneToMany(mappedBy = "owner")
+    private Set<Study> studies = new HashSet<>();
+
+    public Set<Study> getStudies() {
+        return studies;
+    }
+
+    public void setStudies(Set<Study> studies) {
+        this.studies = studies;
+    }
 
     public Long getId() {
         return id;
@@ -51,5 +54,14 @@ public class Account {
         this.password = password;
     }
 
+
+    public void addStudy(Study study) {
+        this.getStudies().add(study);
+        study.setOwner(this);
+    }
+    public void removeStudy(Study study) {
+        this.getStudies().remove(study);
+        study.setOwner(null);
+    }
 
 }
