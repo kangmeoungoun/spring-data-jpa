@@ -1,8 +1,2 @@
-
-DemospringdataApplication 에 @EnableJpaRepositories 있어야 한다.
-JpaRepositoriesRegistrar가 jparepository 빈등록해준다.
-ImportBeanDefinitionRegistrar 이놈이 프로그램을 통해 빈으로 등록해준다.
-
-![image](https://user-images.githubusercontent.com/40969203/101978053-7a06ed00-3c95-11eb-85c5-b5cc90075abc.png)
-
-
+![image](https://user-images.githubusercontent.com/40969203/101982624-a5e79a00-3cb8-11eb-9a99-630f4aed28ae.png)
+![image](https://user-images.githubusercontent.com/40969203/101982629-ada73e80-3cb8-11eb-8d3c-02205c414ef9.png)
