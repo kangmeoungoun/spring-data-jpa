@@ -29,5 +29,6 @@ public class JpaRunner implements ApplicationRunner {
         account.setPassword("jpa");
         Session session = entityManager.unwrap(Session.class);
         session.save(account);
+        
     }
 }
