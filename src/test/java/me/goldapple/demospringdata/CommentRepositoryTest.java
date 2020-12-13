@@ -7,9 +7,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
-import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by jojoldu@gmail.com on 2020-12-12
  * Blog : http://jojoldu.tistory.com
@@ -23,15 +20,15 @@ public class CommentRepositoryTest {
 
     @Test
     public void crud(){
-        Comment comment = new Comment();
-        comment.setComment("Hello Comment");
-        commentRepository.save(comment);
 
-        List<Comment> all = commentRepository.findAll();
-        assertThat(all.size()).isEqualTo(1);
-
-        long count = commentRepository.count();
-        assertThat(count).isEqualTo(1);
+        List<Comment> comments = commentRepository.findAll();
+       /*
+        assertThat(comments).isEmpty();
+        Optional<Comment> byId = commentRepository.findById(100l);
+        assertThat(byId).isEmpty();
+        Comment comment = byId.orElseThrow(IllegalArgumentException::new);
+        */
+        commentRepository.save(null);
     }
 
 }
