@@ -1,3 +1,5 @@
-메소드 이름으로 구현가능 한지  테스트 만들어서 확인
+커넥션 풀 한테요청 가고
+커넥션 풀이 db 커넥션 가져와서
+sql 실행
 
-![image](https://user-images.githubusercontent.com/40969203/102006843-7479d780-3d67-11eb-8048-d1216f6cae77.png)
+![image](https://user-images.githubusercontent.com/40969203/102087793-660de780-3e5d-11eb-9c9c-9c1c0729f72f.png)
