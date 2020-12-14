@@ -1,9 +1,8 @@
 package me.goldapple.demospringdata;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by jojoldu@gmail.com on 2020-12-12
@@ -11,6 +10,7 @@ import java.util.List;
  * Github : http://github.com/jojoldu
  */
 public interface CommentRepository extends MyRepository<Comment,Long>{
-    List<Comment> findByCommentContains(String keyword);
-    Page<Comment> findByLikeCountGreaterThanAndPost(int likecount, Post post, Pageable pageable);
+    //Page<Comment> findByCommentContainsIgnoreCase(String keyworkd, Pageable pageable);
+    Stream<Comment> findByCommentContainsIgnoreCase(String keyworkd, Pageable pageable);
+
 }
