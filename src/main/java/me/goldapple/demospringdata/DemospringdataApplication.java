@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories(repositoryImplementationPostfix = "Default") //구현체 뒤에 붙이는 접미어 Impl
+@EnableJpaRepositories(repositoryBaseClass = SimpleMyRepository.class) //구현체 뒤에 붙이는 접미어 Impl
 public class DemospringdataApplication {
     public static void main(String[] args) {
 
