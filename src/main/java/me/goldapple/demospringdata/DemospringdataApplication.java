@@ -2,10 +2,10 @@ package me.goldapple.demospringdata;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableAsync
+@EnableJpaRepositories(repositoryImplementationPostfix = "Default") //구현체 뒤에 붙이는 접미어 Impl
 public class DemospringdataApplication {
     public static void main(String[] args) {
 

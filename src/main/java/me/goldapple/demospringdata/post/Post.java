@@ -1,0 +1,56 @@
+package me.goldapple.demospringdata.post;
+
+import javax.persistence.*;
+import java.util.Date;
+
+/**
+ * Created by jojoldu@gmail.com on 2020-12-15
+ * Blog : http://jojoldu.tistory.com
+ * Github : http://github.com/jojoldu
+ */
+@Entity
+public class Post {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String title;
+
+    @Lob
+    private String content;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+}
