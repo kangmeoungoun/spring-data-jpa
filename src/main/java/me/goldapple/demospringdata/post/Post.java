@@ -1,5 +1,7 @@
 package me.goldapple.demospringdata.post;
 
+import org.springframework.data.domain.AbstractAggregateRoot;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,7 +11,7 @@ import java.util.Date;
  * Github : http://github.com/jojoldu
  */
 @Entity
-public class Post {
+public class Post extends AbstractAggregateRoot<Post>{
     @Id
     @GeneratedValue
     private Long id;
@@ -52,5 +54,10 @@ public class Post {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public Post publish(){
+        this.registerEvent(new PostPublishedEvent(this));
+        return this;
     }
 }
