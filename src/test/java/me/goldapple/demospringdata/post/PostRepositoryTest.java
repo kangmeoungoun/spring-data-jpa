@@ -1,5 +1,6 @@
 package me.goldapple.demospringdata.post;
 
+import com.querydsl.core.types.Predicate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,27 +28,13 @@ public class PostRepositoryTest {
     ApplicationContext applicationContext;
 
     @Test
-    public void event(){
-        Post post = new Post();
-        post.setTitle("event");
-        PostPublishedEvent event = new PostPublishedEvent(post);
-
-        applicationContext.publishEvent(event);
-
-    }
-
-
-    @Test
     public void crud(){
         Post post = new Post();
         post.setTitle("hibernate");
-        assertThat(postRepository.contains(post)).isFalse();
-
         postRepository.save(post.publish());
 
-        assertThat(postRepository.contains(post)).isTrue();
-
-        postRepository.delete(post);
-        postRepository.flush();
+        Predicate predicate = QPost.post.title.containsIgnoreCase("hibernate");
+        Optional<Post> one = postRepository.findOne(predicate);
+        assertThat(one).isNotEmpty();
     }
 }
