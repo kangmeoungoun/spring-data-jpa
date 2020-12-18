@@ -1,25 +1,20 @@
 package me.goldapple.demospringdata.post;
 
-import org.springframework.data.domain.AbstractAggregateRoot;
-
 import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by jojoldu@gmail.com on 2020-12-15
+ * Created by jojoldu@gmail.com on 2020-12-18
  * Blog : http://jojoldu.tistory.com
  * Github : http://github.com/jojoldu
  */
 @Entity
-public class Post extends AbstractAggregateRoot<Post>{
+public class Post {
     @Id
     @GeneratedValue
     private Long id;
 
     private String title;
-
-    @Lob
-    private String content;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
@@ -40,24 +35,11 @@ public class Post extends AbstractAggregateRoot<Post>{
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public Date getCreated() {
         return created;
     }
 
     public void setCreated(Date created) {
         this.created = created;
-    }
-
-    public Post publish(){
-        this.registerEvent(new PostPublishedEvent(this));
-        return this;
     }
 }
