@@ -9,6 +9,8 @@ import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -29,16 +31,34 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PostControllerTest {
 
     @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
     PostRepository postRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+
     @Test
-    public void crud()throws Exception{
+    public void save()throws Exception{
         Post post = new Post();
         post.setTitle("jpa");
-        postRepository.save(post);
+        Post savePost =postRepository.save(post);//insert persist
+
+
+        //assertTrue(entityManager.contains(post));
+        //assertTrue(entityManager.contains(savePost));
+        assertEquals(post,savePost);
+
+        Post postUpdate = new Post();
+        postUpdate.setId(post.getId());
+        postUpdate.setTitle("hibernate");
+        Post updatePost = postRepository.save(postUpdate);//update merge
+
+        //assertTrue(entityManager.contains(updatePost));
+        //assertFalse(entityManager.contains(postUpdate));
+        assertEquals(postUpdate,updatePost);
+
+
         List<Post> all = postRepository.findAll();
-        assertEquals(all.size(),1);
+        assertEquals(1,all.size());
     }
 }
