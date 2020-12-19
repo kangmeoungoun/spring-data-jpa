@@ -3,14 +3,8 @@ package me.goldapple.demospringdata.post;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by jojoldu@gmail.com on 2020-12-18
- * Blog : http://jojoldu.tistory.com
- * Github : http://github.com/jojoldu
- */
-@Entity
-//@NamedQuery(name="Post.findByTitle",query = "SELECT p FROM Post AS p WHERE p.title = ?1")
 
+@Entity
 public class Post {
     @Id @GeneratedValue
     private Long id;
