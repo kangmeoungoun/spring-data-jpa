@@ -5,6 +5,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -55,7 +57,8 @@ public class PostRepositoryTest {
     @Test
     public void findByTitle(){
         savePost();
-        List<Post> spring = postRepository.findByTitle("Spring");
+//        List<Post> spring = postRepository.findByTitle("Spring", Sort.by("title").ascending());
+        List<Post> spring = postRepository.findByTitle("Spring", JpaSort.unsafe("LENGTH(title)"));
         assertEquals(1,spring.size());
     }
 
