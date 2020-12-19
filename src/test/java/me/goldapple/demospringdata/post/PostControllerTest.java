@@ -32,9 +32,7 @@ public class PostControllerTest {
     PostRepository postRepository;
     @Test
     public void getPost()throws Exception{
-        Post post = new Post();
-        post.setTitle("jpa");
-        postRepository.save(post);
+        createPosts();
         this.mockMvc.perform(get("/post/1"))
                     .andDo(print())
                     .andExpect(status().isOk())
@@ -42,12 +40,10 @@ public class PostControllerTest {
     }
     @Test
     public void getPosts() throws Exception {
-        Post post = new Post();
-        post.setTitle("jpa");
-        postRepository.save(post);
+        createPosts();
 
         this.mockMvc.perform(get("/posts/")
-                    .param("page","0")
+                    .param("page","3")
                     .param("size","10")
                     .param("sort","created,desc")
                     .param("sort","title"))
@@ -55,5 +51,14 @@ public class PostControllerTest {
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.content[0].title",is("jpa")))
                     ;
+    }
+
+    private void createPosts() {
+        for (int i = 0; i < 100; i++) {
+            Post post = new Post();
+            post.setTitle("jpa"+i);
+            postRepository.save(post);
+        }
+
     }
 }
