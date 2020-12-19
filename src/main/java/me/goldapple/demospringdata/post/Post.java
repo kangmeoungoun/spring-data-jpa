@@ -9,6 +9,8 @@ import java.util.Date;
  * Github : http://github.com/jojoldu
  */
 @Entity
+//@NamedQuery(name="Post.findByTitle",query = "SELECT p FROM Post AS p WHERE p.title = ?1")
+
 public class Post {
     @Id @GeneratedValue
     private Long id;
