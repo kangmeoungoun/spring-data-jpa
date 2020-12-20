@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
@@ -13,17 +14,29 @@ import java.util.Optional;
 public class CommentRepositoryTest {
 
     @Autowired
-    PostRepository postRepository;
+    PostRepository posts;
     
     @Autowired
-    CommentRepository comment;
+    CommentRepository comments;
 
     @Test
     public void getComment(){
-        comment.getById(1L);
+        Post post = new Post ();
+        post.setTitle("jpa");
+        Post savedPost = posts.save(post);
 
-        System.out.println("===========================");
 
-        Optional<Comment> byId = comment.findById(1L);
+        Comment comment = new Comment();
+        comment.setComment("goldapple");
+        comment.setPost(savedPost);
+        comment.setUp(10);
+        comment.setDown(1);
+        comments.save(comment);
+
+        List<CommentOnly> byPost_id = comments.findByPost_Id(savedPost.getId( ) , CommentOnly.class);
+        byPost_id.forEach(c->{
+            System.out.println("=============");
+            System.out.println(c.getComment() );
+        });
     }
 }
